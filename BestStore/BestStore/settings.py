@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'master.apps.MasterConfig',
     'user_master.apps.UserMasterConfig',
+    'product_master.apps.ProductMasterConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -145,7 +146,7 @@ EMAIL_HOST_PASSWORD = "abc@123@xyz"
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'homepage'
-
+LOGOUT_REDIRECT_URL = 'homepage'
 SOCIAL_AUTH_GITHUB_KEY = 'f6f4bec6359a3f2c24be'
 SOCIAL_AUTH_GITHUB_SECRET = '1db4fd6def1a42360cb339cf6c68b6962c6b4e0b'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'

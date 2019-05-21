@@ -79,7 +79,7 @@
 				if (this.readyState == 4 && this.status == 200) {
 					res = JSON.parse(this.responseText)
 					if (res['success']) {
-						alert('login successful')
+						window.location.href = '/'
 					} else {
 						alert('login failed')
 					}
