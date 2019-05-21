@@ -59,7 +59,7 @@ ROOT_URLCONF = 'BestStore.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['master/templates/master', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -57,3 +57,8 @@ class Tags(models.Model):
 class ProductImages(models.Model):
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField()
+
+
+class Wishlist(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)

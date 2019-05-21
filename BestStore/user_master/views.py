@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.shortcuts import render, redirect, render_to_response
+from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 import json
 from django.contrib.auth import authenticate, login, logout
@@ -8,11 +8,9 @@ from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+from .forms import UserEmailForm
 
 
-
-
-# Create your views here.
 def register_user(request):
     if request.method == 'POST':
         body = json.loads(request.body)
@@ -43,7 +41,7 @@ def register_user(request):
 
 def user_login(request):
     body = json.loads(request.body)
-    username, password= body['email'], body['password']
+    username, password = body['email'], body['password']
     user = authenticate(request, username=username, password=password)
     if user is not None:
         name = user.first_name
@@ -64,7 +62,8 @@ def verify_user(request, token):
         return redirect('/')
     else:
         import pdb;pdb.set_trace()
-        
+
+
 def logout_view(request):
     logout(request)
     return redirect("homepage")
@@ -72,3 +71,25 @@ def logout_view(request):
 
 def user_dashboard(request):
     return render(request, "user_master/dashboard.html")
+
+
+def forgot_pass(request):
+    form = UserEmailForm(request.POST)
+    # import pdb; pdb.set_trace()
+    if request.method == 'POST':
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            print(email)
+
+            # import pdb;    pdb.set_trace()
+
+            url = f"http://127.0.0.1:8000/password-reset-confirm/'{uidb64.token.replace('<uidb64>','<token>')}"
+            context = {'action': 'Reset Password', 'url': url,}
+            html_message = render_to_string('master/password_reset_email.html', context)
+            plain_message = strip_tags(html_message)
+            send_mail('Best Store Account Confirmation', plain_message, 'yamalik42@gmail.com', [email], html_message=html_message, fail_silently=False, )
+            return HttpResponseRedirect('/password-reset/done/')
+
+        else:
+            form = UserEmailForm()
+    return render(request, 'test.html', {'form': form})
