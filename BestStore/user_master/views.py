@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.core.checks import messages
 from django.shortcuts import render, redirect, render_to_response
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from django.contrib.auth.models import User
 import json
 from django.contrib.auth import authenticate, login, logout
@@ -8,7 +9,6 @@ from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-from .forms import UserEmailForm
 
 
 def register_user(request):
@@ -30,7 +30,7 @@ def register_user(request):
             context = {'action': 'Confirm Email', 'url': url, 'full_name': full_name}
             html_message = render_to_string('master/email.html', context)
             plain_message = strip_tags(html_message)
-            send_mail('Best Store Account Confirmation', plain_message, 'yamalik42@gmail.com', [new_user.email], html_message=html_message, fail_silently=False,)
+            send_mail('Best Store Account Confirmation', plain_message, 'rbtherib2@gmail.com', [new_user.email], html_message=html_message, fail_silently=False,)
             
             json_res = {'success': True}
             return JsonResponse(json_res)
@@ -73,23 +73,25 @@ def user_dashboard(request):
     return render(request, "user_master/dashboard.html")
 
 
-def forgot_pass(request):
-    form = UserEmailForm(request.POST)
-    # import pdb; pdb.set_trace()
+def change_password(request):
     if request.method == 'POST':
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            print(email)
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        import pdb; pdb.set_trace()
+        user = User.objects.get(username__exact=request.user.username)
 
-            # import pdb;    pdb.set_trace()
-
-            url = f"http://127.0.0.1:8000/password-reset-confirm/'{uidb64.token.replace('<uidb64>','<token>')}"
-            context = {'action': 'Reset Password', 'url': url,}
-            html_message = render_to_string('master/password_reset_email.html', context)
-            plain_message = strip_tags(html_message)
-            send_mail('Best Store Account Confirmation', plain_message, 'yamalik42@gmail.com', [email], html_message=html_message, fail_silently=False, )
-            return HttpResponseRedirect('/password-reset/done/')
+        if password1 == password2:
+            if user.check_password(request.POST['old_password']):
+                user.set_password(password1)
+                user.save()
+                return redirect('password_reset_complete')
+            else:
+                messages.error(request, "The old password you have entered is wrong")
+                return render(request, 'reset_password.html')
 
         else:
-            form = UserEmailForm()
-    return render(request, 'test.html', {'form': form})
+            messages.error(request, "Passwords do not match")
+            return render(request, 'user_master/reset_password.html')
+
+    else:
+        return render(request, 'user_master/reset_password.html')
