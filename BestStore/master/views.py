@@ -53,22 +53,15 @@ def render_login_form(request):
 #             form = ContactQueryForm()
 #             return render(request, 'contact_us.html', {'form': form})
 #         return render(request, 'contact_us.html', {'form': form})
-
+#
 def contact_us(request):
-    form = ContactQueryForm(request.POST)
+    form = ContactQueryForm()
     if request.method == 'POST':
+        form = ContactQueryForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            subject = form.cleaned_data['subject']
-            text = form.cleaned_data['query']
 
-            new_query = ContactQuery()
-            new_query.name = name
-            new_query.email = email
-            new_query.subject = subject
-            new_query.query = text
-            new_query.save()
+            # import pdb;pdb.set_trace()
+            form.save()
 
             return HttpResponseRedirect('/contact/')
 

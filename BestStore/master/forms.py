@@ -1,9 +1,11 @@
 from django import forms
 
+from .models import ContactQuery
 
-class ContactQueryForm(forms.Form):
 
-    name = forms.CharField(max_length=60),
-    email = forms.EmailField(max_length=50),
-    subject = forms.CharField(max_length=30),
-    query = forms.Textarea()
+class ContactQueryForm(forms.ModelForm):
+
+    class Meta:
+        model = ContactQuery
+        fields = ('name', 'email', 'subject', 'query', )
+

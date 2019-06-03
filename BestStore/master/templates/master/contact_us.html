@@ -21,7 +21,8 @@
 			<p class="est">Best Store is the one place for you to find all your needs. <br>Contact us with any of your query, our reps wil do their best to support you! </p>
 			<div class="mail-grids">
 				<div class="col-md-8 mail-grid-left animated wow slideInLeft" data-wow-delay=".5s">
-					<form>
+
+					<form action="{% url 'contact' %}" method="POST">
                         {% csrf_token %}
                         {{ form }}
 
