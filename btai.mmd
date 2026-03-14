@@ -1,0 +1,614 @@
+<mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1900" pageHeight="2200" math="0" shadow="1" background="#F0F4F8">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- ============================================================ -->
+    <!-- TITLE                                                         -->
+    <!-- ============================================================ -->
+    <mxCell id="title" value="Competitive Intelligence Chatbot — System Architecture &amp; Request Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=18;fontStyle=1;fontColor=#1B3A5C;" vertex="1" parent="1">
+      <mxGeometry x="80" y="14" width="1700" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="titleLine" value="" style="line;strokeColor=#1B3A5C;strokeWidth=2;fillColor=none;" vertex="1" parent="1">
+      <mxGeometry x="80" y="48" width="1700" height="8" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- SWIMLANE COLUMN HEADERS                                       -->
+    <!-- ============================================================ -->
+    <mxCell id="lane1hdr" value="👤  USER / BROWSER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1B3A5C;fontColor=#FFFFFF;strokeColor=#1B3A5C;fontSize=12;fontStyle=1;arcSize=5;" vertex="1" parent="1">
+      <mxGeometry x="80" y="58" width="280" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="lane2hdr" value="🔐  AUTH &amp; SESSION LAYER" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6A0572;fontColor=#FFFFFF;strokeColor=#6A0572;fontSize=12;fontStyle=1;arcSize=5;" vertex="1" parent="1">
+      <mxGeometry x="380" y="58" width="280" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="lane3hdr" value="🗄️  ADMIN DATA PIPELINE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0D6E6E;fontColor=#FFFFFF;strokeColor=#0D6E6E;fontSize=12;fontStyle=1;arcSize=5;" vertex="1" parent="1">
+      <mxGeometry x="680" y="58" width="280" height="36" as="geometry" />
+    </mxCell>
+    <mxCell id="lane4hdr" value="🤖  CHAT &amp; AI ENGINE (Gemini)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B45309;fontColor=#FFFFFF;strokeColor=#B45309;fontSize=12;fontStyle=1;arcSize=5;" vertex="1" parent="1">
+      <mxGeometry x="980" y="58" width="800" height="36" as="geometry" />
+    </mxCell>
+
+    <!-- Lane separator lines (vertical) -->
+    <mxCell id="sep1" value="" style="line;strokeColor=#AAAAAA;strokeWidth=1;fillColor=none;horizontal=0;" vertex="1" parent="1">
+      <mxGeometry x="360" y="58" width="8" height="2250" as="geometry" />
+    </mxCell>
+    <mxCell id="sep2" value="" style="line;strokeColor=#AAAAAA;strokeWidth=1;fillColor=none;horizontal=0;" vertex="1" parent="1">
+      <mxGeometry x="660" y="58" width="8" height="2250" as="geometry" />
+    </mxCell>
+    <mxCell id="sep3" value="" style="line;strokeColor=#AAAAAA;strokeWidth=1;fillColor=none;horizontal=0;" vertex="1" parent="1">
+      <mxGeometry x="960" y="58" width="8" height="2250" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- START                                                         -->
+    <!-- ============================================================ -->
+    <mxCell id="start" value="START" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1B3A5C;fontColor=#FFFFFF;strokeColor=#1B3A5C;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="165" y="110" width="110" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- USER VISITS SITE                                              -->
+    <!-- ============================================================ -->
+    <mxCell id="u_visit" value="User visits  /  (browser)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#1B3A5C;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="130" y="175" width="180" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- AUTH: Session check                                           -->
+    <!-- ============================================================ -->
+    <mxCell id="d_session" value="Active session?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#6A0572;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="445" y="163" width="140" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- AUTH: Role check -->
+    <mxCell id="d_role" value="Role = Admin?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#6A0572;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="445" y="265" width="140" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- AUTH: Login page -->
+    <mxCell id="p_login" value="Render login.html&lt;br/&gt;(GET /login)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#6A0572;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="445" y="360" width="140" height="45" as="geometry" />
+    </mxCell>
+
+    <!-- AUTH: Validate credentials -->
+    <mxCell id="p_validate" value="POST /login&lt;br/&gt;check_password_hash()&lt;br/&gt;Verify against users.json" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#6A0572;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="445" y="430" width="140" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- AUTH: Valid? -->
+    <mxCell id="d_valid" value="Credentials&lt;br/&gt;valid?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#6A0572;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="445" y="510" width="140" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- AUTH: Flash error -->
+    <mxCell id="p_loginerr" value="flash('Invalid credentials')&lt;br/&gt;→ Re-render login.html" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#AE4132;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="310" y="518" width="120" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- AUTH: Set session -->
+    <mxCell id="p_session" value="Set session:&lt;br/&gt;username + role&lt;br/&gt;(Flask session cookie)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#6A0572;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="445" y="600" width="140" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ADMIN PIPELINE                                                -->
+    <!-- ============================================================ -->
+    <mxCell id="p_admindash" value="Admin Dashboard&lt;br/&gt;GET /admin&lt;br/&gt;admin.html" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#0D6E6E;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="740" y="175" width="150" height="50" as="geometry" />
+    </mxCell>
+
+    <mxCell id="p_upload" value="Admin uploads file&lt;br/&gt;POST /admin/upload/{csv|excel|json|image}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#0D6E6E;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="740" y="260" width="150" height="50" as="geometry" />
+    </mxCell>
+
+    <mxCell id="d_filetype" value="File type?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#0D6E6E;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="748" y="340" width="134" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- Tabular branch -->
+    <mxCell id="p_tabular" value="pandas read_csv /&lt;br/&gt;read_excel / json.load&lt;br/&gt;→ DataFrame" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#0D6E6E;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="700" y="440" width="150" height="55" as="geometry" />
+    </mxCell>
+
+    <mxCell id="p_sqlite" value="make_table_name()&lt;br/&gt;load_df_into_sqlite()&lt;br/&gt;→ In-memory SQLite DB&lt;br/&gt;+ pandas cache" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#0D6E6E;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="700" y="520" width="150" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- Image branch -->
+    <mxCell id="p_imgload" value="PIL Image.open()&lt;br/&gt;analyze_image()&lt;br/&gt;→ image_text_cache" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#0D6E6E;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="870" y="440" width="150" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- Data ready state -->
+    <mxCell id="p_dataready" value="Data available&lt;br/&gt;in memory&lt;br/&gt;(sqlite_tables populated)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#0D6E6E;fontSize=10;arcSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="748" y="615" width="134" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- USER CHAT FLOW                                                -->
+    <!-- ============================================================ -->
+    <mxCell id="p_chatui" value="Chat UI — GET /chat&lt;br/&gt;chat.html rendered" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#1B3A5C;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="130" y="690" width="180" height="45" as="geometry" />
+    </mxCell>
+
+    <mxCell id="p_sendmsg" value="User types query&lt;br/&gt;POST /chat&lt;br/&gt;{ message: '...' }" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#1B3A5C;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="130" y="765" width="180" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- AI ENGINE — query_csv_data_sql()                             -->
+    <!-- ============================================================ -->
+
+    <!-- Check data available -->
+    <mxCell id="d_hasdata" value="Tabular or&lt;br/&gt;Image data&lt;br/&gt;loaded?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B45309;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1060" y="755" width="150" height="75" as="geometry" />
+    </mxCell>
+
+    <!-- No data -->
+    <mxCell id="p_nodata" value="Return: 'No data uploaded.&lt;br/&gt;Please ask admin to&lt;br/&gt;upload data files.'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#AE4132;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="1060" y="870" width="150" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- Intent classifier -->
+    <mxCell id="p_intent" value="Intent Classification&lt;br/&gt;━━━━━━━━━━━━━━&lt;br/&gt;Scan for STRATEGIC_KEYWORDS:&lt;br/&gt;['should','improve','strategy',&lt;br/&gt;'recommend','gap','beat'…]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B45309;fontSize=10;arcSize=10;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="750" width="200" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- Query type branch -->
+    <mxCell id="d_querytype" value="Query type?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B45309;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1515" y="755" width="150" height="75" as="geometry" />
+    </mxCell>
+
+    <!-- Image query path -->
+    <mxCell id="p_imgpath" value="Image Query Path&lt;br/&gt;━━━━━━━━━━━━━━&lt;br/&gt;get_image_analysis()&lt;br/&gt;Build img_context string&lt;br/&gt;→ Gemini ask_simple()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4D6;strokeColor=#B45309;fontSize=10;arcSize=10;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="1670" y="850" width="185" height="100" as="geometry" />
+    </mxCell>
+
+    <!-- SQL Step 1 -->
+    <mxCell id="p_sql1" value="STEP 1 — SQL Generation&lt;br/&gt;━━━━━━━━━━━━━━━━━━━━&lt;br/&gt;get_sqlite_schema() → schema string&lt;br/&gt;Gemini prompt:&lt;br/&gt;  • System: 'Expert SQLite generator…'&lt;br/&gt;  • User: Schema + User Question&lt;br/&gt;→ Returns raw SQL string" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B45309;fontSize=10;arcSize=10;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="880" width="220" height="125" as="geometry" />
+    </mxCell>
+
+    <!-- SQL sanitize -->
+    <mxCell id="p_sanitize" value="sanitize_sql()&lt;br/&gt;━━━━━━━━━━━━━━&lt;br/&gt;Strip markdown fences&lt;br/&gt;Enforce SELECT-only&lt;br/&gt;Extract clean SQL string" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B45309;fontSize=10;arcSize=10;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="1035" width="220" height="95" as="geometry" />
+    </mxCell>
+
+    <!-- Safety decision -->
+    <mxCell id="d_safe" value="SELECT-only&lt;br/&gt;query?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D6730D;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1290" y="1155" width="150" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- Unsafe SQL rejection -->
+    <mxCell id="p_unsafe" value="Return: 'AI generated&lt;br/&gt;unsafe query. Please&lt;br/&gt;rephrase.'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#AE4132;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="1130" y="1162" width="140" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- SQL Step 2 -->
+    <mxCell id="p_sql2" value="STEP 2 — SQL Execution&lt;br/&gt;━━━━━━━━━━━━━━━━━━━━&lt;br/&gt;sqlite_conn.execute(sql_query)&lt;br/&gt;cursor.fetchmany(200)&lt;br/&gt;Build result_data as list[dict]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B45309;fontSize=10;arcSize=10;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="1260" y="1255" width="220" height="110" as="geometry" />
+    </mxCell>
+
+    <!-- Rows returned? -->
+    <mxCell id="d_rows" value="Rows&lt;br/&gt;returned?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D6730D;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1290" y="1390" width="150" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- No rows -->
+    <mxCell id="p_norows" value="Return: 'SQL returned&lt;br/&gt;no results. Try&lt;br/&gt;rephrasing.'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#AE4132;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="1130" y="1395" width="140" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- Intent branch -->
+    <mxCell id="d_intent" value="is_strategic?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D6730D;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="1290" y="1485" width="150" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- Strategic path -->
+    <mxCell id="p_strategic" value="STEP 3A — Strategic Answer&lt;br/&gt;━━━━━━━━━━━━━━━━━━━━&lt;br/&gt;System: 'Senior CI strategist for Adidas'&lt;br/&gt;Sections: DATA SUMMARY / GAP /&lt;br/&gt;RECOMMENDATIONS / EXPECTED IMPACT /&lt;br/&gt;NEXT STEPS&lt;br/&gt;→ Gemini ask_simple()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B45309;fontSize=10;arcSize=10;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="1450" y="1575" width="240" height="140" as="geometry" />
+    </mxCell>
+
+    <!-- Analytical path -->
+    <mxCell id="p_analytical" value="STEP 3B — Analytical Answer&lt;br/&gt;━━━━━━━━━━━━━━━━━━━━&lt;br/&gt;System: 'Concise CI analyst for Adidas'&lt;br/&gt;Sections: SUMMARY /&lt;br/&gt;KEY INSIGHTS / RECOMMENDATIONS&lt;br/&gt;→ Gemini ask_simple()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B45309;fontSize=10;arcSize=10;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="1140" y="1575" width="240" height="140" as="geometry" />
+    </mxCell>
+
+    <!-- Error handling -->
+    <mxCell id="p_errhandle" value="Error Handler&lt;br/&gt;━━━━━━━━━━━━&lt;br/&gt;429 → 'Rate limit exceeded'&lt;br/&gt;403 → 'Auth error: check API key'&lt;br/&gt;Other → 'Error processing query'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#AE4132;fontSize=10;arcSize=10;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="1670" y="1160" width="185" height="110" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- RESPONSE ASSEMBLY                                             -->
+    <!-- ============================================================ -->
+    <mxCell id="p_assemble" value="Assemble result_parts[ ]&lt;br/&gt;join with '\\n\\n'&lt;br/&gt;Return JSON response" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B45309;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="1290" y="1750" width="220" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- RENDER RESPONSE IN CHAT                                       -->
+    <!-- ============================================================ -->
+    <mxCell id="p_render" value="Render response in chat.html&lt;br/&gt;(plain-text section labels,&lt;br/&gt;dash bullet formatting)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#1B3A5C;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="130" y="1840" width="180" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- LOGOUT                                                        -->
+    <!-- ============================================================ -->
+    <mxCell id="p_logout" value="GET /logout&lt;br/&gt;session.clear()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#1B3A5C;fontSize=10;arcSize=10;" vertex="1" parent="1">
+      <mxGeometry x="445" y="1920" width="140" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- END -->
+    <mxCell id="stop" value="END" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1B3A5C;fontColor=#FFFFFF;strokeColor=#1B3A5C;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="165" y="1980" width="110" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- LEGEND                                                        -->
+    <!-- ============================================================ -->
+    <mxCell id="leg_title" value="LEGEND" style="text;html=1;fontSize=11;fontStyle=1;fontColor=#1B3A5C;" vertex="1" parent="1">
+      <mxGeometry x="80" y="1920" width="300" height="20" as="geometry" />
+    </mxCell>
+    <mxCell id="leg_user" value="User / Browser action" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#1B3A5C;fontSize=9;" vertex="1" parent="1">
+      <mxGeometry x="80" y="1945" width="140" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="leg_auth" value="Auth / Session" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#6A0572;fontSize=9;" vertex="1" parent="1">
+      <mxGeometry x="80" y="1975" width="140" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="leg_admin" value="Admin Data Pipeline" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#0D6E6E;fontSize=9;" vertex="1" parent="1">
+      <mxGeometry x="80" y="2005" width="140" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="leg_ai" value="AI / Gemini Engine" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#B45309;fontSize=9;" vertex="1" parent="1">
+      <mxGeometry x="80" y="2035" width="140" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="leg_error" value="Error / Rejection path" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#AE4132;fontSize=9;" vertex="1" parent="1">
+      <mxGeometry x="80" y="2065" width="140" height="24" as="geometry" />
+    </mxCell>
+    <mxCell id="leg_dec" value="Decision Gate" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D6730D;fontSize=9;" vertex="1" parent="1">
+      <mxGeometry x="235" y="1942" width="100" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================ -->
+    <!-- ARROWS — Main Flow                                            -->
+    <!-- ============================================================ -->
+
+    <!-- start → u_visit -->
+    <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1B3A5C;strokeWidth=2;" edge="1" source="start" target="u_visit" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- u_visit → d_session -->
+    <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1B3A5C;strokeWidth=1.5;" edge="1" source="u_visit" target="d_session" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_session YES → d_role -->
+    <mxCell id="a3" value="YES" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontStyle=1;fontSize=10;" edge="1" source="d_session" target="d_role" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_session NO → p_login -->
+    <mxCell id="a4" value="NO" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#C62828;fontColor=#C62828;fontStyle=1;fontSize=10;" edge="1" source="d_session" target="p_login" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_login → p_validate -->
+    <mxCell id="a5" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6A0572;" edge="1" source="p_login" target="p_validate" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_validate → d_valid -->
+    <mxCell id="a6" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6A0572;" edge="1" source="p_validate" target="d_valid" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_valid YES → p_session -->
+    <mxCell id="a7" value="YES" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontStyle=1;fontSize=10;" edge="1" source="d_valid" target="p_session" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_valid NO → p_loginerr -->
+    <mxCell id="a8" value="NO" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#C62828;fontColor=#C62828;fontStyle=1;fontSize=10;" edge="1" source="d_valid" target="p_loginerr" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_loginerr → p_login (feedback) -->
+    <mxCell id="a8b" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#C62828;strokeWidth=1.5;dashed=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" source="p_loginerr" target="p_login" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_session → d_role (re-check role) -->
+    <mxCell id="a9" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6A0572;" edge="1" source="p_session" target="d_role" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="515" y="665" />
+          <mxPoint x="515" y="297" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- d_role YES (admin) → p_admindash -->
+    <mxCell id="a10" value="ADMIN" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0D6E6E;fontColor=#0D6E6E;fontStyle=1;fontSize=10;" edge="1" source="d_role" target="p_admindash" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_role NO (user) → p_chatui -->
+    <mxCell id="a11" value="USER" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1B3A5C;fontColor=#1B3A5C;fontStyle=1;fontSize=10;exitX=0;exitY=0.5;entryX=0.5;entryY=0;" edge="1" source="d_role" target="p_chatui" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="400" y="297" />
+          <mxPoint x="220" y="297" />
+          <mxPoint x="220" y="690" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_admindash → p_upload -->
+    <mxCell id="a12" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0D6E6E;" edge="1" source="p_admindash" target="p_upload" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_upload → d_filetype -->
+    <mxCell id="a13" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0D6E6E;" edge="1" source="p_upload" target="d_filetype" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_filetype → p_tabular (CSV/Excel/JSON) -->
+    <mxCell id="a14" value="CSV/Excel/JSON" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0D6E6E;fontColor=#0D6E6E;fontStyle=1;fontSize=9;exitX=0;exitY=0.5;" edge="1" source="d_filetype" target="p_tabular" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_filetype → p_imgload (Image) -->
+    <mxCell id="a15" value="Image" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0D6E6E;fontColor=#0D6E6E;fontStyle=1;fontSize=9;exitX=1;exitY=0.5;" edge="1" source="d_filetype" target="p_imgload" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_tabular → p_sqlite -->
+    <mxCell id="a16" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0D6E6E;" edge="1" source="p_tabular" target="p_sqlite" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_sqlite → p_dataready -->
+    <mxCell id="a17" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0D6E6E;" edge="1" source="p_sqlite" target="p_dataready" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="775" y="590" />
+          <mxPoint x="815" y="590" />
+          <mxPoint x="815" y="640" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_imgload → p_dataready -->
+    <mxCell id="a18" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#0D6E6E;" edge="1" source="p_imgload" target="p_dataready" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="945" y="510" />
+          <mxPoint x="945" y="630" />
+          <mxPoint x="882" y="630" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_chatui → p_sendmsg -->
+    <mxCell id="a19" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1B3A5C;" edge="1" source="p_chatui" target="p_sendmsg" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_sendmsg → d_hasdata -->
+    <mxCell id="a20" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;strokeWidth=2;" edge="1" source="p_sendmsg" target="d_hasdata" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_hasdata NO → p_nodata -->
+    <mxCell id="a21" value="NO" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#C62828;fontColor=#C62828;fontStyle=1;fontSize=10;" edge="1" source="d_hasdata" target="p_nodata" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_hasdata YES → p_intent -->
+    <mxCell id="a22" value="YES" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontStyle=1;fontSize=10;" edge="1" source="d_hasdata" target="p_intent" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_intent → d_querytype -->
+    <mxCell id="a23" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;" edge="1" source="p_intent" target="d_querytype" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_querytype → p_imgpath (Image query) -->
+    <mxCell id="a24" value="Image" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;fontColor=#B45309;fontStyle=1;fontSize=10;exitX=1;exitY=0.5;" edge="1" source="d_querytype" target="p_imgpath" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1665" y="792" />
+          <mxPoint x="1762" y="792" />
+          <mxPoint x="1762" y="850" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- d_querytype → p_sql1 (Tabular query) -->
+    <mxCell id="a25" value="Tabular" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;fontColor=#B45309;fontStyle=1;fontSize=10;exitX=0;exitY=0.5;" edge="1" source="d_querytype" target="p_sql1" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1370" y="792" />
+          <mxPoint x="1370" y="942" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_sql1 → p_sanitize -->
+    <mxCell id="a26" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;" edge="1" source="p_sql1" target="p_sanitize" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_sanitize → d_safe -->
+    <mxCell id="a27" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#D6730D;" edge="1" source="p_sanitize" target="d_safe" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_safe NO → p_unsafe -->
+    <mxCell id="a28" value="NO" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#C62828;fontColor=#C62828;fontStyle=1;fontSize=10;exitX=0;exitY=0.5;" edge="1" source="d_safe" target="p_unsafe" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_safe YES → p_sql2 -->
+    <mxCell id="a29" value="YES" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontStyle=1;fontSize=10;" edge="1" source="d_safe" target="p_sql2" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_sql2 → d_rows -->
+    <mxCell id="a30" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;" edge="1" source="p_sql2" target="d_rows" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_rows NO → p_norows -->
+    <mxCell id="a31" value="NO" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#C62828;fontColor=#C62828;fontStyle=1;fontSize=10;exitX=0;exitY=0.5;" edge="1" source="d_rows" target="p_norows" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_rows YES → d_intent -->
+    <mxCell id="a32" value="YES" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontStyle=1;fontSize=10;" edge="1" source="d_rows" target="d_intent" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_intent YES (strategic) → p_strategic -->
+    <mxCell id="a33" value="YES" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontStyle=1;fontSize=10;exitX=1;exitY=0.5;" edge="1" source="d_intent" target="p_strategic" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- d_intent NO (analytical) → p_analytical -->
+    <mxCell id="a34" value="NO" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#C62828;fontColor=#C62828;fontStyle=1;fontSize=10;exitX=0;exitY=0.5;" edge="1" source="d_intent" target="p_analytical" parent="1">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- p_strategic → p_assemble -->
+    <mxCell id="a35" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;" edge="1" source="p_strategic" target="p_assemble" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1570" y="1715" />
+          <mxPoint x="1400" y="1715" />
+          <mxPoint x="1400" y="1777" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_analytical → p_assemble -->
+    <mxCell id="a36" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;" edge="1" source="p_analytical" target="p_assemble" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1260" y="1715" />
+          <mxPoint x="1400" y="1715" />
+          <mxPoint x="1400" y="1777" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_imgpath → p_assemble -->
+    <mxCell id="a37" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#B45309;dashed=1;" edge="1" source="p_imgpath" target="p_assemble" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1762" y="950" />
+          <mxPoint x="1870" y="950" />
+          <mxPoint x="1870" y="1777" />
+          <mxPoint x="1510" y="1777" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_assemble → p_render -->
+    <mxCell id="a38" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1B3A5C;strokeWidth=2;" edge="1" source="p_assemble" target="p_render" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1290" y="1777" />
+          <mxPoint x="220" y="1777" />
+          <mxPoint x="220" y="1867" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Error paths → p_assemble -->
+    <mxCell id="a39" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#AE4132;dashed=1;" edge="1" source="p_unsafe" target="p_assemble" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1200" y="1189" />
+          <mxPoint x="1200" y="1777" />
+          <mxPoint x="1290" y="1777" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="a40" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#AE4132;dashed=1;" edge="1" source="p_norows" target="p_assemble" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1200" y="1422" />
+          <mxPoint x="1200" y="1777" />
+          <mxPoint x="1290" y="1777" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="a41" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#AE4132;dashed=1;" edge="1" source="p_nodata" target="p_render" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1060" y="897" />
+          <mxPoint x="220" y="897" />
+          <mxPoint x="220" y="1867" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_errhandle → p_assemble -->
+    <mxCell id="a42" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#AE4132;dashed=1;" edge="1" source="p_errhandle" target="p_assemble" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1870" y="1215" />
+          <mxPoint x="1870" y="1777" />
+          <mxPoint x="1510" y="1777" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_render → p_logout / send more -->
+    <mxCell id="a43" value="Send another query" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1B3A5C;fontColor=#1B3A5C;fontSize=9;dashed=1;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" edge="1" source="p_render" target="p_sendmsg" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="330" y="1867" />
+          <mxPoint x="330" y="790" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_render → p_logout -->
+    <mxCell id="a44" value="Logout" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#6A0572;fontColor=#6A0572;fontSize=9;" edge="1" source="p_render" target="p_logout" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="220" y="1920" />
+          <mxPoint x="515" y="1920" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- p_logout → stop -->
+    <mxCell id="a45" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#1B3A5C;strokeWidth=2;" edge="1" source="p_logout" target="stop" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="515" y="1990" />
+          <mxPoint x="220" y="1990" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+    <!-- Exception edge from SQL execution → p_errhandle -->
+    <mxCell id="a46" value="Exception" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#AE4132;fontColor=#AE4132;fontStyle=1;fontSize=9;dashed=1;exitX=1;exitY=0.5;" edge="1" source="p_sql2" target="p_errhandle" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="1480" y="1310" />
+          <mxPoint x="1762" y="1310" />
+          <mxPoint x="1762" y="1215" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+
+  </root>
+</mxGraphModel>
