@@ -28,7 +28,7 @@ flowchart TD
     classDef db fill:#050a1f,stroke:#f5a623,stroke-width:2px,color:#ffebb3
     classDef stealth fill:#0a1930,stroke:#ba00ff,stroke-width:2px,color:#eec4ff,stroke-dasharray: 4 4
 
-    A(((["🚀 SYSTEM_INIT"]))):::startEnd --> B["⚙️ Parse User Arguments<br/>(category, max-products, headless)"]:::process
+    A(["🚀 SYSTEM_INIT"]):::startEnd --> B["⚙️ Parse User Arguments<br/>(category, max-products, headless)"]:::process
     B --> C["🌐 Launch Chromium Browser<br/>(Playwright context, args: no-sandbox)"]:::process
 
     subgraph Cyber_Stealth ["Anti-Bot Subsystem (Akamai Evasion)"]
@@ -75,6 +75,6 @@ flowchart TD
     
     W -- "NO" --> Z[/"🚨 Print 'Anti-Bot Block' Error<br/>Provide Bypass Tips"/]:::io
 
-    Y --> End(((["🛑 TERMINATE"]))):::startEnd
+    Y --> End(["🛑 TERMINATE"]):::startEnd
     Z --> End
 ```
